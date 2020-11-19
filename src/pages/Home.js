@@ -1,12 +1,12 @@
-import React , {useEffect} from 'react'
+import React , { useEffect } from 'react'
 //REDUX
 import { useDispatch, useSelector } from 'react-redux'
-import {loadGames} from '../actions/gamesAction'
+import { loadGames } from '../actions/gamesAction'
 //components
 import Game from '../components/Game'
 //styling and animations
 import styled from 'styled-components'
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 
 
 const Home = () => {
@@ -16,13 +16,37 @@ const Home = () => {
         dispatch(loadGames());
     },[dispatch]);
     //get the data back
-    const { popular, upcoming ,newGames} = useSelector(state => state.games);
+    const { popular, upcoming ,newGames} = useSelector((state) => state.games);
 
     return (
             <GameList>
-                <h2>upcoming games</h2>
+                <h2>Upcoming Games</h2>
                     <Games>
-                        {upcoming.map(game => (
+                        {upcoming?.map((game) => (
+                            <Game name={game.name} 
+                            released={game.released} 
+                            id={game.id}
+                            image = {game.background_image}
+                            key={game.id}
+                            />
+                        ))}
+                    </Games>
+
+                    <h2>Popular Games</h2>
+                    <Games>
+                        {popular?.map((game) => (
+                            <Game name={game.name} 
+                            released={game.released} 
+                            id={game.id}
+                            image = {game.background_image}
+                            key={game.id}
+                            />
+                        ))}
+                    </Games>
+
+                    <h2>New Games</h2>
+                    <Games>
+                        {newGames?.map((game) => (
                             <Game name={game.name} 
                             released={game.released} 
                             id={game.id}
